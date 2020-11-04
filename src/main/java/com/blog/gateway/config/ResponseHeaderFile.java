@@ -10,6 +10,10 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * @author zhulinzhong
@@ -19,6 +23,7 @@ import java.util.ArrayList;
 @Configuration
 public class ResponseHeaderFile implements GlobalFilter, Ordered {
 
+    @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         return chain.filter(exchange).then(Mono.defer(() -> {
             exchange.getResponse().getHeaders().entrySet().stream()
